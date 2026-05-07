@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>비즈토스 | 폐업 말고 매각하세요</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0e9b8a;
+    --primary-dark: #0a7a6c;
+    --primary-light: #e8f7f5;
+    --bg: #f4f8fb;
+    --bg-dark: #0d1a2b;
+    --text: #1a2636;
+    --text-muted: #6b7a8d;
+    --white: #ffffff;
+    --accent: #1a3a5c;
+    --border: #dce6ef;
+    --card-bg: #ffffff;
+    --danger: #e84b4b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    padding: 0 40px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display: flex; align-items: center; gap: 8px; }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 16px;
+  }
+  .logo-text { font-weight: 700; font-size: 18px; color: var(--text); }
+  .nav-cta {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--primary-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e8f7f5 0%, #f0f6fb 50%, #e8f0f7 100%);
+    display: flex; align-items: center;
+    padding: 100px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(14,155,138,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: -50px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26,58,92,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(14,155,138,0.1);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    border: 1px solid rgba(14,155,138,0.2);
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--primary);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  .hero-social-proof {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 10px;
+    border-left: 3px solid var(--primary);
+  }
+  .hero-social-proof strong { color: var(--primary); }
+
+  .hero-cta-group { display: flex; flex-direction: column; gap: 12px; }
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 18px 32px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,155,138,0.3); }
+  .btn-secondary {
+    background: white;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+  .btn-note { font-size: 12px; color: var(--text-muted); text-align: center; }
+
+  /* HERO RIGHT - Visual card */
+  .hero-visual {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    animation: floatup 0.8s ease-out;
+  }
+  @keyframes floatup { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .visual-title { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; font-weight: 500; }
+  .pain-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .pain-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 14px 16px;
+    background: #fdf4f4;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #c0392b;
+    border: 1px solid #f5d5d5;
+  }
+  .pain-icon { font-size: 16px; flex-shrink: 0; }
+  .arrow-down {
+    text-align: center;
+    font-size: 24px;
+    color: var(--primary);
+    margin: 4px 0;
+  }
+  .solution-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 12px;
+    padding: 18px 20px;
+    color: white;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .solution-icon { font-size: 28px; }
+  .solution-text { font-size: 15px; font-weight: 700; line-height: 1.4; }
+  .solution-sub { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+
+  /* STATS */
+  .stats {
+    background: var(--accent);
+    padding: 48px 40px;
+  }
+  .stats-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 42px; font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,0.7); }
+
+  /* SECTION COMMON */
+  section { padding: 80px 40px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 34px; font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.35;
+  }
+  .section-sub { font-size: 16px; color: var(--text-muted); margin-bottom: 48px; line-height: 1.7; }
+
+  /* PAIN SECTION */
+  .pain-section { background: white; }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pain-card {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 28px 24px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .pain-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); border-color: var(--primary); }
+  .pain-card-icon { font-size: 28px; margin-bottom: 14px; }
+  .pain-card-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .pain-card-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .pain-quote {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--danger);
+    font-style: italic;
+    padding: 8px 12px;
+    background: #fdf4f4;
+    border-radius: 6px;
+  }
+
+  /* SERVICE */
+  .service-section { background: var(--bg); }
+  .service-list { display: flex; flex-direction: column; gap: 20px; }
+  .service-item {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .service-item:hover { border-color: var(--primary); box-shadow: 0 8px 24px rgba(14,155,138,0.1); }
+  .service-num {
+    width: 48px; height: 48px;
+    background: var(--primary);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 20px;
+    flex-shrink: 0;
+  }
+  .service-content {}
+  .service-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .service-badge {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* WHO */
+  .who-section { background: white; }
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .who-card {
+    border-radius: 16px;
+    padding: 28px 24px;
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .who-card:hover { border-color: var(--primary); }
+  .who-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .who-card:hover::before { transform: scaleX(1); }
+  .who-num {
+    font-size: 36px; font-weight: 900;
+    color: var(--primary-light);
+    font-family: 'Noto Serif KR', serif;
+    margin-bottom: 12px;
+    -webkit-text-stroke: 2px var(--primary);
+    color: transparent;
+  }
+  .who-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
+  .who-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* FREE VALUATION */
+  .valuation-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+  }
+  .valuation-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .valuation-section .section-tag {
+    background: rgba(255,255,255,0.15);
+    color: white;
+  }
+  .valuation-section .section-title { color: white; }
+  .valuation-section .section-sub { color: rgba(255,255,255,0.75); margin-bottom: 32px; }
+  .valuation-btns { display: flex; flex-direction: column; gap: 12px; }
+  .btn-white {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 16px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .btn-white:hover { transform: translateX(4px); }
+  .btn-outline-white {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+  .valuation-visual {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .val-steps { display: flex; flex-direction: column; gap: 16px; }
+  .val-step {
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+  }
+  .val-step-num {
+    width: 32px; height: 32px;
+    background: white;
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+    flex-shrink: 0;
+  }
+  .val-step-text { font-size: 14px; color: rgba(255,255,255,0.9); }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--bg-dark);
+    padding: 100px 40px;
+    text-align: center;
+  }
+  .final-cta .section-tag {
+    background: rgba(14,155,138,0.15);
+    color: var(--primary);
+  }
+  .final-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px; font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .final-sub { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 40px; }
+  .final-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .final-btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .final-btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+  .final-btn-secondary {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .final-btn-secondary:hover { border-color: white; color: white; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-dark);
+    padding: 32px 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.3); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-title { font-size: 32px; }
+    .stats-inner { grid-template-columns: 1fr; gap: 24px; }
+    .pain-grid, .who-grid { grid-template-columns: 1fr; }
+    .service-item { grid-template-columns: 48px 1fr; }
+    .service-badge { display: none; }
+    .valuation-inner { grid-template-columns: 1fr; }
+    .final-title { font-size: 28px; }
+    nav { padding: 0 20px; }
+    section { padding: 60px 20px; }
+    .hero { padding: 100px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-mark">B</div>
+    <span class="logo-text">Biztoss</span>
+  </div>
+  <button class="nav-cta" onclick="alert('상담 신청 페이지로 이동합니다.')">1분 만에 상담 신청 →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">이커머스 전문 M&A 플랫폼</div>
+      <h1 class="hero-title">
+        매출이 늘어도<br>
+        통장이 비어간다면,<br>
+        <em>폐업 말고 매각하세요.</em>
+      </h1>
+      <p class="hero-sub">당신의 스토어도 충분히 가능합니다.<br>지금 이 순간에도 같은 고민을 했던 셀러들이 비즈토스와 매각을 진행 중입니다.</p>
+      <div class="hero-social-proof">
+        <strong>📦 누적 매물 규모 200억+</strong> · AI 실사 평균 <strong>3일</strong> · SNAAC 대상 수상
+      </div>
+      <div class="hero-cta-group">
+        <button class="btn-primary" onclick="alert('상담 신청으로 이동합니다.')">
+          지금 1분 만에 상담 신청하기 →
+        </button>
+        <button class="btn-secondary" onclick="alert('무료 가치평가로 이동합니다.')">
+          먼저 내 스토어 가치 무료로 확인하기
+        </button>
+        <p class="btn-note">※ 비용 없음 · 익명 처리 · 강제 계약 없음</p>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <p class="visual-title">💬 셀러들이 하는 고민</p>
+      <ul class="pain-list">
+        <li class="pain-item">
+          <span class="pain-icon">😮‍💨</span>
+          <span>광고비·수수료 빼면 남는 게 없어요. 이게 맞나 싶어요.</span>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">😔</span>
+          <span>알리·테무 공세에 마진이 계속 줄어들고 있어요.</span>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">😩</span>
+          <span>3년 운영했는데 그냥 폐업하면 다 0원이 되는 건지…</span>
+        </li>
+      </ul>
+      <div class="arrow-down">↓</div>
+      <div class="solution-card">
+        <div class="solution-icon">✅</div>
+        <div>
+          <div class="solution-text">폐업 전에 매각 가치부터 확인하세요</div>
+          <div class="solution-sub">비즈토스가 AI로 3일 안에 가치를 산정해 드립니다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">200억+</div>
+      <div class="stat-label">누적 매물 규모</div>
+    </div>
+    <div>
+      <div class="stat-num">3일</div>
+      <div class="stat-label">평균 AI 실사 기간</div>
+    </div>
+    <div>
+      <div class="stat-num">SNAAC</div>
+      <div class="stat-label">대상 수상</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain-section">
+  <div class="section-inner">
+    <span class="section-tag">셀러의 현실</span>
+    <h2 class="section-title">혼자 감당하기엔<br>너무 많은 것들이 쌓였습니다</h2>
+    <p class="section-sub">비즈토스를 찾는 셀러들이 공통적으로 겪는 고민입니다.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-card-icon">💸</div>
+        <div class="pain-card-title">수익성 악화</div>
+        <div class="pain-card-desc">광고비·수수료·물류비가 늘면서 실제로 남는 돈이 점점 줄어들고 있습니다.</div>
+        <div class="pain-quote">"매출은 1억인데 통장엔 300만원밖에 없어요"</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-icon">🏪</div>
+        <div class="pain-card-title">독자 생존의 한계</div>
+        <div class="pain-card-desc">쿠팡·네이버가 시장 55%를 독식하고, 알리·테무까지 치고 들어오면서 중소 셀러의 입지가 좁아지고 있습니다.</div>
+        <div class="pain-quote">"이 구조에서 혼자 버티는 게 가능할까요?"</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card-icon">😓</div>
+        <div class="pain-card-title">번아웃과 재고 공포</div>
+        <div class="pain-card-desc">새벽 CS, 반품 처리, 발주까지 혼자 다 하면서 쌓인 재고와 세무 걱정까지 더해져 한계에 다다릅니다.</div>
+        <div class="pain-quote">"그냥 폐업해야 하나, 이러면 재고는 어떡하죠?"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section class="service-section">
+  <div class="section-inner">
+    <span class="section-tag">비즈토스가 하는 일</span>
+    <h2 class="section-title">이커머스 전문 M&A 플랫폼,<br>비즈토스입니다</h2>
+    <p class="section-sub">회계법인 수준의 실사를 AI로 3일 만에. 검증된 인수자와의 안전한 매칭까지.</p>
+    <div class="service-list">
+      <div class="service-item">
+        <div class="service-num">1</div>
+        <div class="service-content">
+          <div class="service-title">회계법인 실사 수개월 → 비즈토스 AI 단 3일</div>
+          <div class="service-desc">PG(전자결제), 광고, 마켓플레이스 데이터를 직접 검증해 매출 왜곡을 탐지하고 이커머스 특화 가치평가 모델을 적용합니다.</div>
+        </div>
+        <div class="service-badge">⚡ 속도 혁신</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">2</div>
+        <div class="service-content">
+          <div class="service-title">NDA 서명 완료된 인수자만 연결</div>
+          <div class="service-desc">카페 직거래처럼 아무에게나 정보가 노출되지 않습니다. 비밀유지계약을 완료한 검증된 인수 희망자에게만 매물이 전달됩니다.</div>
+        </div>
+        <div class="service-badge">🔒 안전 거래</div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">3</div>
+        <div class="service-content">
+          <div class="service-title">이커머스 실무 출신 전문가가 매물별 배정</div>
+          <div class="service-desc">세무·법무·마케팅 각 분야의 전문가가 매물별로 배정되어 매각 전 과정을 함께 설계합니다.</div>
+        </div>
+        <div class="service-badge">👤 전담 관리</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who-section">
+  <div class="section-inner">
+    <span class="section-tag">대상 명확화</span>
+    <h2 class="section-title">이런 셀러에게<br>비즈토스를 권합니다</h2>
+    <p class="section-sub">지금 당장 매각을 결심하지 않아도 괜찮습니다. 먼저 가치부터 알아보세요.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-num">01</div>
+        <div class="who-title">스마트스토어·자사몰 운영 3년 이상, 폐업을 고민 중인 셀러</div>
+        <div class="who-desc">폐업하면 그동안 쌓은 리뷰, 단골, 브랜드가 모두 0원이 됩니다. 매각하면 자산이 됩니다.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-num">02</div>
+        <div class="who-title">다음 사업 자본이 필요해 엑싯을 준비 중인 셀러</div>
+        <div class="who-desc">잘 키운 스토어를 자산으로 전환해 다음 라운드의 종잣돈으로 만드세요.</div>
+      </div>
+      <div class="who-card">
+        <div class="who-num">03</div>
+        <div class="who-title">직거래 카페를 써봤지만 진지한 인수자를 못 찾은 셀러</div>
+        <div class="who-desc">기존 직거래 채널은 매물의 9할이 신뢰하기 어렵습니다. 비즈토스는 검증된 인수자 풀을 보유하고 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE VALUATION -->
+<section class="valuation-section">
+  <div class="valuation-inner">
+    <div>
+      <span class="section-tag">무료 가치평가</span>
+      <h2 class="section-title">먼저 내 스토어 가치를<br>무료로 확인하세요</h2>
+      <p class="section-sub">유료 상담 전 5분 만에 내 스토어의 예상 매각가를 확인할 수 있습니다. 비용 없이, 익명으로.</p>
+      <div class="valuation-btns">
+        <button class="btn-white" onclick="alert('간이 가치평가로 이동합니다.')">
+          <span>간이 가치평가 지금 무료로</span>
+          <span>→</span>
+        </button>
+        <button class="btn-outline-white" onclick="alert('밸류업 시뮬레이터로 이동합니다.')">
+          <span>밸류업 시뮬레이터 직접 돌려보기</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+    <div class="valuation-visual">
+      <div class="val-steps">
+        <div class="val-step">
+          <div class="val-step-num">1</div>
+          <div class="val-step-text">스토어 카테고리·월매출·운영 기간 입력 (3분)</div>
+        </div>
+        <div class="val-step">
+          <div class="val-step-num">2</div>
+          <div class="val-step-text">AI가 멀티플·예상 매각가 자동 산출</div>
+        </div>
+        <div class="val-step">
+          <div class="val-step-num">3</div>
+          <div class="val-step-text">결과 확인 후 전문가 상담 연결 (선택)</div>
+        </div>
+        <div class="val-step">
+          <div class="val-step-num">4</div>
+          <div class="val-step-text">NDA 체결 후 인수자 매칭 시작</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <span class="section-tag">지금 시작하세요</span>
+  <h2 class="final-title">가치부터 먼저 알고 나서,<br>매각 전략을 비즈토스와 설계하세요</h2>
+  <p class="final-sub">지금 이 순간에도 같은 고민을 했던 셀러는 비즈토스와 함께 매각을 진행 중입니다.</p>
+  <div class="final-btns">
+    <button class="final-btn-primary" onclick="alert('상담 신청으로 이동합니다.')">지금 상담 신청하기 →</button>
+    <button class="final-btn-secondary" onclick="alert('무료 가치평가로 이동합니다.')">간이 가치평가 무료로 →</button>
+    <button class="final-btn-secondary" onclick="alert('시뮬레이터로 이동합니다.')">밸류업 시뮬레이터 →</button>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Biztoss. All rights reserved. | 이커머스 전문 M&A 플랫폼</p>
+</footer>
+
+</body>
+</html>
